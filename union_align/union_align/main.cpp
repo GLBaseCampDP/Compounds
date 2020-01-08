@@ -1,35 +1,27 @@
+
+
 #include <iostream>
-
 using namespace std;
+union U {
+    struct A {
+        int i; // поле вкладеної структури
+        char c ; // поле вкладеної структури
+        int j; // поле вкладеної структури
+    } a; // поле об'єданння
+    char m[7]; // поле об'єданння
+} u; // екземпляр об'єданння
+int main(void) {
+    u.a.c = 'a';
+    cout << "Size of U: " << sizeof (U) << endl<<
+    "Size of U::A :" << sizeof(U::A) << endl<<
+    "Size of u.m: " << sizeof(u.m) << endl<<
+    "Size of u.a.i: " << sizeof(u.a.i) << endl<<
+    "Size of u.a.i: " << sizeof(u.a.c) << endl<<
+    "Size of u.a: " << sizeof(u.a) << endl;
+    cout << "& u " << (&u) << '\n' <<
+            "& u.m " << (&u.m) << '\n' <<
+            "& u.a " << (&u.a) << '\n' <<
+            "& u.a.i " << (&u.a.i) << '\n' <<
+            "& u.a.j "<< (&u.a.j) << '\n';
 
-struct S {}; 	// порожня структура
-//#pragma pack(push, 1) // вирівнювання по 1 байту
-struct S1 {
-    char a[2];	char c, *s;
-    S *p;   	short i;
-} z = { "a", 'b', "qwerty", new S };
-//#pragma pack(pop)		// кінець
-struct S2
-{
-    char a[2];
-    char c, added_1, *s;
-    S *p;
-    char added_2, added_3;
-    short i;
-} z2;
-
-int main(void)
-{
-   cout << "Size of int :" << sizeof(int) << endl <<
-     "Size of int* :" << sizeof(int*) << endl <<
-     "Size of short :" << sizeof(short) << endl <<
-     "Size of char :" << sizeof(char) << endl <<
-     "Size of S1 :" << sizeof(S1) << endl <<
-     "Size of S :" << sizeof(S) << endl <<
-     "Size of S2 :" << sizeof(S2) << endl <<
-        "adr z.a :" << long(&z.a) << endl <<
-        "adr z.c :" << long(&z.c) << endl<<
-        "adr z.s :" << long(&z.s) << endl<<
-        "adr z.p :" << long(&z.p) << endl<<
-        "adr z.i :" << long(&z.i) << endl;
 }
